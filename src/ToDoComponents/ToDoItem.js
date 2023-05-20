@@ -1,8 +1,8 @@
-function ToDoItems(){
+function ToDoItems({text}){
     return (
       <li>
         <span>V</span>
-        <p>Llorar por React</p>
+        <p>{text}</p>
         <span>X</span>
       </li>
     )
