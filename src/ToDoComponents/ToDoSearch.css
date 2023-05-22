@@ -1,0 +1,35 @@
+/* Estilos de la barra de búsqueda */
+
+#input-container{
+    
+    width: 50%;
+    position: relative;
+    margin: 0px auto;
+}
+
+#input-container img{
+    display: block;
+    width: 64px;
+    position: absolute;
+    top: -8px;
+    left: -13px
+}
+
+#input-container input{
+    display: block;
+    margin: 0px auto;
+    width: 93%;
+    padding: 0.9em;
+    padding-left: 2.5em;
+    border-radius: 10px;
+    border: 1px solid #e6dfdf;
+    transition: all 350ms;
+    color: #cccccc;
+    font-size: 16px;
+}
+
+#input-container input:focus{
+    outline: 0;
+    border-color: black;
+    color: black
+}

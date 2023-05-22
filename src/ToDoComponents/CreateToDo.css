@@ -1,0 +1,72 @@
+.button{
+    display: block;
+    width: 80px;
+    height: 80px;
+    border-radius: 20%;
+    
+    font-size: 30px;
+    
+    
+    
+    
+    background: #eceaea;
+    transition: all 350ms;
+    position: absolute;
+    right: 340px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+}
+
+.inner{
+    display: block;
+    width: 0;
+    height: 0 ;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 20%;
+    background-color: black;
+    transition: all 0.1s;
+    box-shadow: rgba(50, 50, 167, 0.25) 0px 50px 100px -20px, rgba(36, 110, 206, 0.3) 0px 30px 60px -30px, rgba(52, 136, 221, 0.89) 0px -2px 6px 0px inset;
+    
+    
+}
+
+.add{
+    font-style: italic;
+    position: absolute;
+    display: block;
+    font-size: 40px;
+    width: 15px;
+    top: 23%;
+    left: 35%;
+    color: black;
+    z-index: 1;
+    user-select: none;
+}
+
+.button:hover .inner, .inner_cancel{
+    
+    height: 76px;
+  margin-left: -38px;
+  margin-top: -38px;
+  width: 76px;
+    
+}
+
+.button:hover .add, .cancel{
+    color: #eceaea;
+    
+}
+
+.cancel{
+    transform: rotate(47deg);
+    top: 19%;
+    left: 38%;
+}
+
+.inner_cancel{
+    
+    background-color: rgba(255, 0, 0, 0.774);
+}

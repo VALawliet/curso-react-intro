@@ -1,0 +1,68 @@
+ul{
+    margin: 0px auto;
+    display: flex;
+    width: 55%;
+    flex-flow: column;
+    list-style: none;
+    padding: 0px;
+    align-items: center;
+    height: 405px;
+    overflow-y: auto;
+    padding-top: 20px;
+    scrollbar-width:thin;
+    scrollbar-color: blue;
+}
+
+.check-true{
+    color: greenyellow
+}
+
+.item-completed{
+    font-weight: bold;
+}
+
+/* Estilois de los ToDoItems */
+ul .ListItem{
+    
+    position: relative;
+    font-size: 24px;
+    width: 90%;
+    color: #cccccc
+    
+}
+
+ul .ListItem .delete{
+    position: absolute;
+    right: -5px;
+    top: -16px;
+    font-style: italic;
+    font-weight: bold;
+    transition: all 350ms;
+    user-select: none;
+}
+
+ul .ListItem .delete:hover{
+    color: red;
+    cursor: pointer;
+}
+
+ul .ListItem .Item{
+    display: flex;
+    border-radius: 5%;
+    box-shadow: 5px 5px 30px 2px hsla(231,7%,63%,.1);
+    height: 50px;
+    margin-bottom: 17px;
+    align-items: center;
+
+}
+
+ul .ListItem .Item .check{
+    margin-right: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+ul .ListItem .Item p{
+    margin: 0px;
+    flex-basis: 90%;
+}

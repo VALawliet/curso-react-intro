@@ -4,15 +4,28 @@ import { ToDoList } from './ToDoComponents/ToDoList';
 import { ToDoItems } from './ToDoComponents/ToDoItem';
 import { CreateToDo } from './ToDoComponents/CreateToDo';
 import React from 'react';
-import './App.css';
+
 
 
 const defaultToDos = [
-  { text: 'Cortar Cebolla', completed: true },
-  { text: 'Tomar el curso de React JS', completed: false },
-  { text: 'Llorar con React', completed: false }
+  { text: 'Cortar Cebolla', completed: true, num: 1 },
+  { text: 'Tomar el curso de React JS', completed: false, num: 2 },
+  { text: 'Llorar con React', completed: false, num: 3 },
+  { text: 'Ejemplo', completed: true, num: 4 },
+  { text: 'React me estresa', completed: false, num: 5 },
+  { text: 'unu', completed: false, num: 6 },
+  { text: 'Cortar Cebolla', completed: true, num: 7 },
+  { text: 'Tomar el curso de React JS', completed: false, num: 8 },
+  { text: 'Llorar con React', completed: false, num: 9 },
+  { text: 'Ejemplo', completed: true, num: 10 },
+  { text: 'React me estresa', completed: false, num: 11 },
+  { text: 'unu', completed: false, num: 12 }
 
 ]
+
+const defaultToDos2 = []
+
+
 function App() {
   return (
 
@@ -28,6 +41,8 @@ function App() {
       
       {/* ToDoList será un componente que cuenta con dos etiquetas; una de apertura y una de cierre.
       Todo lo que esté dentro de ToDoList react lo interpreta como una prop que usa el identificador children */}
+
+      
       <ToDoList>
 
         {/* Utilizamos las llaves para escribir código Javascript dentro de un componente de react.
@@ -36,7 +51,7 @@ function App() {
         que recibe un props de key para identificar cada componente de React; un texto que será insertado dentro
         del componente y el props de completed que aún no tiene uso */}
         {defaultToDos.map((todo)=>{
-          return (<ToDoItems key={todo.text} text = {todo.text} completed={todo.completed}/>)
+          return (<ToDoItems key={todo.num} text = {todo.text} completed={todo.completed} ID = {todo.num}/>)
         })}
       </ToDoList>
 
@@ -49,6 +64,6 @@ function App() {
 }
 
 
-
+export {defaultToDos}
 export default App;
 
