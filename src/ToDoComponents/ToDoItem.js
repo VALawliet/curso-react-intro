@@ -1,35 +1,17 @@
-function ToDoItems({text, ID}){
-    function toggleCheckTrue(id){
-
-      const checks = document.querySelectorAll('.check');
-      const ps = document.querySelectorAll('p');
-
-      for(let check of checks){
-
-        if(check.id == id){
-          
-          check.classList.toggle('check-true');
-          for(let p of ps){
-            if(p.classList.contains(id)){
-              p.classList.toggle('item-completed')
-            }
-          }
-
-        }
-      }
-
-      
-    }
+function ToDoItems({text, ID, toggleCheck, deleteTodos}){
+    
 
     
     return (
       <li className="ListItem">
         <div className="Item">
-          <span id={ID} className="check" onClick={()=>{toggleCheckTrue(ID)}}>✔</span>
+          <span id={ID} className="check" onClick={()=>{toggleCheck(text)}}>✔</span>
           <p className={ID}>{text}</p>
         </div>
         
-        <span className="delete">X</span>
+        <span className="delete" onClick={()=>{
+          deleteTodos(text)
+        }}>X</span>
       </li>
     )
 }
