@@ -8,7 +8,7 @@ import React from 'react';
 
 
 
-const defaultToDos = [
+/* const defaultToDos = [
   { text: 'Cortar Cebolla', completed: false, num: 0 },
   { text: 'Tomar el curso de React JS', completed: false, num: 1 },
   { text: 'Llorar con React', completed: false, num: 2 },
@@ -18,12 +18,41 @@ const defaultToDos = [
 
 ]
 
-const defaultToDos2 = []
+localStorage.setItem('TODOS_V1', defaultToDos);
+localStorage.removeItem('TODOS_V1'); */
 
+function useLocalStorage(itemName, initialValue){
+
+  
+  const localStorageResponse = localStorage.getItem(itemName);
+  let parsedItems;
+
+  if(!localStorageResponse){
+    localStorage.setItem(itemName, JSON.stringify(initialValue))
+    parsedItems = initialValue;
+
+  }else{
+
+    let jsonResponse = JSON.parse(localStorageResponse);
+    parsedItems = jsonResponse
+  }
+
+  const [Item, setItem] = React.useState(parsedItems);
+
+  function saveItems(newItems){
+    let stringJson = JSON.stringify(newItems)
+    localStorage.setItem(itemName, stringJson)
+    setItem(newItems);
+  };
+
+  return [Item, saveItems];
+}
 
 function App() {
 
-  const [todos, setTodos]= React.useState(defaultToDos);
+  
+
+  const [todos, saveTodos]= useLocalStorage('TODOS_V1', []);
   const [searchValue, setSearchValue] = React.useState("");
   
 
@@ -41,6 +70,8 @@ function App() {
   });
   //Función para completed
 
+ 
+
   
     
   function toggleCheckTrue(text){
@@ -52,17 +83,28 @@ function App() {
       return todo.text == text
     })
     
-
     checks[newTodoID].classList.toggle('check-true');
-    ps[newTodoID].classList.toggle('item-completed')
-
+    ps[newTodoID].classList.toggle('item-completed');
     if(checks[newTodoID].classList.contains('check-true')){
+      newTodos[newTodoID].completed = true;
+      saveTodos(newTodos)
+    }
+    else{
+      newTodos[newTodoID].completed = false;
+    saveTodos(newTodos)
+    }
+    
+
+    
+    
+
+    /* if(checks[newTodoID].classList.contains('check-true')){
       newTodos[newTodoID].completed	= true;
-      setTodos(newTodos)
+      saveTodos(newTodos)
     }else{
       newTodos[newTodoID].completed	= false;
-      setTodos(newTodos)
-    }
+      saveTodos(newTodos)
+    } */
 
 
     /* for(let check of checks){
@@ -97,7 +139,7 @@ function App() {
     });
 
     newTodos.splice(TodoIndex, 1);
-    setTodos(newTodos)
+    saveTodos(newTodos)
   }
 
   
@@ -141,6 +183,6 @@ function App() {
 }
 
 
-export {defaultToDos}
+
 export default App;
 

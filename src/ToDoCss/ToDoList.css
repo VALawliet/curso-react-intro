@@ -19,6 +19,7 @@ ul{
 
 .item-completed{
     font-weight: bold;
+    text-decoration: line-through;
 }
 
 /* Estilois de los ToDoItems */
@@ -27,10 +28,14 @@ ul .ListItem{
     position: relative;
     font-size: 24px;
     width: 90%;
-    color: #cccccc
+    color: #cccccc;
+    transition: all 350ms;
     
 }
 
+ul .ListItem:hover p{
+    color:#918787e0;
+}
 ul .ListItem .delete{
     position: absolute;
     right: -5px;
@@ -60,9 +65,15 @@ ul .ListItem .Item .check{
     margin-right: 10px;
     cursor: pointer;
     user-select: none;
+    transition: all 350ms;
 }
 
+
+ul .ListItem .Item .check:hover{
+    color: black;
+}
 ul .ListItem .Item p{
     margin: 0px;
     flex-basis: 90%;
 }
+

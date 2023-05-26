@@ -1,5 +1,5 @@
 import React from "react"
-import "./ToDoSearch.css"
+import "../ToDoCss/ToDoSearch.css"
 import search from "../img/search-icon-png-1.png"
 
 function ToDoSearch({searchValue, setSearchValue}){
