@@ -8,6 +8,7 @@ import React from 'react';
 
 
 
+
 /* const defaultToDos = [
   { text: 'Cortar Cebolla', completed: false, num: 0 },
   { text: 'Tomar el curso de React JS', completed: false, num: 1 },
@@ -22,22 +23,40 @@ localStorage.setItem('TODOS_V1', defaultToDos);
 localStorage.removeItem('TODOS_V1'); */
 
 function useLocalStorage(itemName, initialValue){
-
+  const [Item, setItem] = React.useState(initialValue);
+  const [loading, setLoading] = React.useState(true);
+  const [err, setErr] = React.useState(false);
   
-  const localStorageResponse = localStorage.getItem(itemName);
-  let parsedItems;
+  
 
-  if(!localStorageResponse){
-    localStorage.setItem(itemName, JSON.stringify(initialValue))
-    parsedItems = initialValue;
+  React.useEffect(()=>{
 
-  }else{
+    setTimeout(() => {
+      try{
+        const localStorageResponse = localStorage.getItem(itemName);
+        let parsedItems;
+        if(!localStorageResponse){
+          localStorage.setItem(itemName, JSON.stringify(initialValue))
+          parsedItems = initialValue;
+    
+        }else{
+    
+          let jsonResponse = JSON.parse(localStorageResponse);
+          parsedItems = jsonResponse;
+          setItem(parsedItems)
+        }
+  
+        setLoading(false);
+      }
+      catch (error){
+        setLoading(false);
+        setErr(true);
+      }
+    }, 2000);
+}, []);
+  
 
-    let jsonResponse = JSON.parse(localStorageResponse);
-    parsedItems = jsonResponse
-  }
-
-  const [Item, setItem] = React.useState(parsedItems);
+ 
 
   function saveItems(newItems){
     let stringJson = JSON.stringify(newItems)
@@ -45,15 +64,17 @@ function useLocalStorage(itemName, initialValue){
     setItem(newItems);
   };
 
-  return [Item, saveItems];
+  return {Item, saveItems, loading, err};
 }
 
 function App() {
 
   
 
-  const [todos, saveTodos]= useLocalStorage('TODOS_V1', []);
+  const {Item: todos, saveItems: saveTodos, loading, err}= useLocalStorage('TODOS_V1', []);
   const [searchValue, setSearchValue] = React.useState("");
+
+
   
 
   const completedTodos = todos.filter((todo)=>{
@@ -61,13 +82,18 @@ function App() {
   }).length ;
   const totalTodos = todos.length;
 
-  const searchedTodos = todos.filter((todo)=>{
 
+
+  const searchedTodos = todos.filter((todo)=>{
+    
     const todoText = todo.text.toLowerCase();
     const searchText = searchValue.toLowerCase();
+    
 
     return todoText.includes(searchText);
   });
+
+  
   //Función para completed
 
  
@@ -78,21 +104,40 @@ function App() {
     
     const checks = document.querySelectorAll('.check');
     const ps = document.querySelectorAll('p');
-    const newTodos = [...todos];
+    const newTodos = [...todos]
+    const newTodos2 = [...searchedTodos];
     const newTodoID = newTodos.findIndex((todo)=>{
+      
+      return todo.text == text
+    });
+    console.log(newTodoID)
+    const newTodoID2 = newTodos2.findIndex((todo)=>{
       return todo.text == text
     })
     
-    checks[newTodoID].classList.toggle('check-true');
-    ps[newTodoID].classList.toggle('item-completed');
-    if(checks[newTodoID].classList.contains('check-true')){
-      newTodos[newTodoID].completed = true;
-      saveTodos(newTodos)
+    
+    checks[newTodoID2].classList.toggle('check-true');
+    ps[newTodoID2].classList.toggle('item-completed');
+    if(checks[newTodoID2].classList.contains('check-true')){
+      
+
+      for(let todo of newTodos){
+        if(todo.text == newTodos2[newTodoID2].text){
+          todo.completed = true;
+        };
+      };
+
+      saveTodos(newTodos);
     }
     else{
-      newTodos[newTodoID].completed = false;
-    saveTodos(newTodos)
-    }
+
+      for(let todo of newTodos){
+        if(todo.text == newTodos2[newTodoID2].text){
+          todo.completed = false;
+        }
+      }
+      saveTodos(newTodos);
+    };
     
 
     
@@ -156,7 +201,7 @@ function App() {
 
       <Darken/>
       <ToDoCounter completed={completedTodos} total={totalTodos}/>
-      <ToDoSearch searchValue={searchValue} setSearchValue={setSearchValue}/>
+      <ToDoSearch searchValue={searchValue} setSearchValue={setSearchValue} searchedTodos = {searchedTodos} saveTodos = {saveTodos}/>
       
       {/* ToDoList será un componente que cuenta con dos etiquetas; una de apertura y una de cierre.
       Todo lo que esté dentro de ToDoList react lo interpreta como una prop que usa el identificador children */}
@@ -169,6 +214,11 @@ function App() {
         elementos por cada elemento del array original. En este caso, map devolverá un array que contendrá un ToDoItems
         que recibe un props de key para identificar cada componente de React; un texto que será insertado dentro
         del componente y el props de completed que aún no tiene uso */}
+
+        {loading && <p>Estamos cargando...</p>}
+        {err && <p>Desesperación por error</p>}
+        {(!loading && searchedTodos.length == 0) && <p>Crea tu primer Todo</p>}
+
         {searchedTodos.map((todo)=>{
           return (<ToDoItems key={todo.num} text = {todo.text} completed={todo.completed} ID = {todo.num} toggleCheck = {toggleCheckTrue} deleteTodos = {deletingTodo}/>)
         })}

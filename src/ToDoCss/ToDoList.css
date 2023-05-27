@@ -17,6 +17,10 @@ ul{
     color: greenyellow
 }
 
+.check-true:hover{
+    color: rgb(178, 241, 30) !important;
+}
+
 .item-completed{
     font-weight: bold;
     text-decoration: line-through;
