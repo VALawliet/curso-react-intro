@@ -4,6 +4,10 @@ import { ToDoList } from './ToDoComponents/ToDoList';
 import { ToDoItems } from './ToDoComponents/ToDoItem';
 import { CreateToDo } from './ToDoComponents/CreateToDo';
 import { Darken } from './ToDoComponents/Darken';
+import { ToDosLoading } from './ToDoComponents/ToDosLoading';
+import { ToDosError } from './ToDoComponents/ToDosError';
+import { EmptyTodos } from './ToDoComponents/EmptyTodos';
+import { ToDoWaiting } from './ToDoComponents/ToDoWaiting';
 import React from 'react';
 
 
@@ -52,7 +56,7 @@ function useLocalStorage(itemName, initialValue){
         setLoading(false);
         setErr(true);
       }
-    }, 2000);
+    }, 5000);
 }, []);
   
 
@@ -200,7 +204,9 @@ function App() {
       {/* Le pasamos dos props al ToDoCounter que serán utilizados dentro del componente en su archivo */}
 
       <Darken/>
-      <ToDoCounter completed={completedTodos} total={totalTodos}/>
+      {loading && <ToDoWaiting/>}
+      {!loading && <ToDoCounter completed={completedTodos} total={totalTodos}/>}
+
       <ToDoSearch searchValue={searchValue} setSearchValue={setSearchValue} searchedTodos = {searchedTodos} saveTodos = {saveTodos}/>
       
       {/* ToDoList será un componente que cuenta con dos etiquetas; una de apertura y una de cierre.
@@ -215,9 +221,13 @@ function App() {
         que recibe un props de key para identificar cada componente de React; un texto que será insertado dentro
         del componente y el props de completed que aún no tiene uso */}
 
-        {loading && <p>Estamos cargando...</p>}
-        {err && <p>Desesperación por error</p>}
-        {(!loading && searchedTodos.length == 0) && <p>Crea tu primer Todo</p>}
+        {loading && 
+        <>
+          <ToDosLoading/> 
+          <ToDosLoading/>
+        </>}
+        {err && <ToDosError/>}
+        {(!loading && searchedTodos.length == 0) && <EmptyTodos/>}
 
         {searchedTodos.map((todo)=>{
           return (<ToDoItems key={todo.num} text = {todo.text} completed={todo.completed} ID = {todo.num} toggleCheck = {toggleCheckTrue} deleteTodos = {deletingTodo}/>)

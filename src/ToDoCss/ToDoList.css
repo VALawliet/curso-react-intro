@@ -58,7 +58,7 @@ ul .ListItem .delete:hover{
 ul .ListItem .Item{
     display: flex;
     border-radius: 5%;
-    box-shadow: 5px 5px 30px 2px hsla(231,7%,63%,.1);
+    box-shadow: 5px 5px 30px 2px hsla(231, 5%, 48%, 0.281);
     height: 50px;
     margin-bottom: 17px;
     align-items: center;
