@@ -1,0 +1,33 @@
+.loading-button{
+    display: block;
+    width: 80px;
+    height: 80px;
+    border-radius: 20%;
+    
+    font-size: 30px;
+    
+    
+    
+    
+    
+    background: linear-gradient(90deg, rgba(209, 203, 203, 0.747), rgba(163, 162, 162, 0.69));
+    background-size: 400% 400%;
+    position: absolute;
+    right: 340px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    animation: loadingButton 3s ease-in-out infinite;
+}
+
+@keyframes loadingButton{
+    0%{
+        background-position: 0% 50%;
+    }
+
+    50%{
+        background-position: 100% 50%;
+    }
+
+    100%{
+        background-position: 0% 50%;
+    }
+}

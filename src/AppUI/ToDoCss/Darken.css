@@ -3,13 +3,13 @@
     height: calc(100%);
     position: fixed;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.507);
+    background-color: rgba(31, 30, 30, 0.884);
 }
 
 .inactive{
-    display: none
+    display: none !important
 }
 
 .lower{
-    opacity: 0.2;
+    opacity: 0.1;
 }

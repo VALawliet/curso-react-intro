@@ -2,6 +2,13 @@ import '../ToDoCss/ToDoCounter.css';
 
 function ToDoCounter({total, completed}){
 
+    if(total == 0){
+      return(
+      
+      <h1>¡Empieza a añadir tus primeros ToDos!</h1>
+      
+      )
+    }
     if(total != completed){
       return(
   
