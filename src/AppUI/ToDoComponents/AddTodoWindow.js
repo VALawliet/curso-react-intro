@@ -38,9 +38,16 @@ function AddToDoWindow({ newValue, setNewValue, addingTodos }) {
         }}
         onKeyDown={(Event) => {
           if (Event.key == "Enter") {
-            addingTodos(newValue);
-            ChangingCss();
-            setNewValue("");
+            
+            if(newValue.length <= 60){
+              addingTodos(newValue);
+              ChangingCss();
+              setNewValue("");
+            }else{
+              alert('La tarea no puede ser tan larga')
+              ChangingCss()
+            }
+            
           }
         }}
       />
@@ -50,9 +57,15 @@ function AddToDoWindow({ newValue, setNewValue, addingTodos }) {
           <span
             className="btn-text"
             onClick={() => {
-              addingTodos(newValue);
-              ChangingCss();
-              setNewValue("");
+              if(newValue.length <= 60){
+                addingTodos(newValue);
+                ChangingCss();
+                setNewValue("");
+              }else{
+                alert('La tarea no puede ser tan larga');
+                ChangingCss()
+              }
+              
             }}
           >
             Añadir

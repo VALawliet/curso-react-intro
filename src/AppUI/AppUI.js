@@ -10,6 +10,7 @@ import { EmptyTodos } from './ToDoComponents/EmptyTodos';
 import { ToDoWaiting } from './ToDoComponents/ToDoWaiting';
 import { LoadingCreate } from './ToDoComponents/LoadingCreate';
 import { AddToDoWindow } from './ToDoComponents/AddTodoWindow';
+import "./ToDoCss/responsive.css";
 
 function AppUI({
     loading,
